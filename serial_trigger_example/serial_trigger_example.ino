@@ -24,5 +24,7 @@ void loop() {
   }
    
   Serial.print('\n'); // Does a newline
+//  Test all buttons pressed
+//  Serial.print("1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, \n");
 
 }
