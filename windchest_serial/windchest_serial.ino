@@ -21,17 +21,13 @@ void setup() {
 void loop() {
   for(int pin = 0; pin < number_pins; pin++) {
     // read the analog in value:
-    sensorValue = analogRead(analog_pins[pin]);
-    if (sensorValue == 1024) {
-      Serial.print("p = ");
-      Serial.print(pin);
-      Serial.print("\t v = ");
-      Serial.println(sensorValue);
+    //sensorValue = analogRead(analog_pins[pin]);
+    //Serial.println(analogRead(analog_pins[pin]));
+    if (analogRead(analog_pins[pin]) > 870) {
+     Serial.print("1,");
     } else {
-      Serial.print("p = ");
-      Serial.print(pin);
-      Serial.print("\t v = ");
-      Serial.println(0);
+      Serial.print("0,");
     }
   }
+  Serial.println("");
 }

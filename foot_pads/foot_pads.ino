@@ -7,7 +7,7 @@
  */
 
 #define LED_PIN     13
-#define TRIGGER_OUTPUT_PIN 1
+#define TRIGGER_OUTPUT_PIN 2
 #define NUM_LEDS    60
 
 #define BRIGHTNESS  64
