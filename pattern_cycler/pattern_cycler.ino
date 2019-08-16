@@ -15,9 +15,9 @@ FASTLED_USING_NAMESPACE
 #warning "Requires FastLED 3.1 or later; check github for latest code."
 #endif
 
-#define DATA_PIN    3
+#define DATA_PIN    13
 //#define CLK_PIN   4
-#define LED_TYPE    WS2811
+#define LED_TYPE    WS2812B
 #define COLOR_ORDER GRB
 #define NUM_LEDS    60
 CRGB leds[NUM_LEDS];
@@ -25,11 +25,12 @@ CRGB leds[NUM_LEDS];
 #define BRIGHTNESS          96
 #define FRAMES_PER_SECOND  120
 
-const int buttonPin = 2;
+const int buttonPin = 12;
 int lastButtonState = LOW;
 int buttonCounter = 0;
 
 void setup() {
+  Serial.begin(9600); // For debug
   delay(3000); // 3 second delay for recovery
   
   // tell FastLED about the LED strip configuration
@@ -66,6 +67,7 @@ void loop()
 
   // Get the current state of the button
   int currentButtonState = digitalRead(buttonPin);
+  Serial.println("loop");
 
   if (currentButtonState == LOW) {
      // Switch the state of the output
@@ -75,6 +77,7 @@ void loop()
   // Has the button gone high since we last read it?
   if (currentButtonState == HIGH && lastButtonState == LOW) {
      // Switch the state of the output
+     Serial.println("Switch pattern");
      nextPattern();
   }
 
@@ -192,7 +195,7 @@ void fadeall() { for(int i = 0; i < NUM_LEDS; i++) { leds[i].nscale8(250); } }
 
 void cylon() { 
   static uint8_t hue = 0;
-  Serial.print("x");
+ 
   // First slide the led in one direction
   for(int i = 0; i < NUM_LEDS; i++) {
     // Set the i'th led to red 
@@ -205,7 +208,6 @@ void cylon() {
     // Wait a little bit before we loop around and do it again
     delay(10);
   }
-  Serial.print("x");
 
   // Now go in the other direction.  
   for(int i = (NUM_LEDS)-1; i >= 0; i--) {
@@ -220,4 +222,3 @@ void cylon() {
     delay(10);
   }
 }
-
