@@ -9,21 +9,21 @@
   Use Touchdesigner to read the serial port
 */
 
-int sensorValue = 0;        
 static const uint8_t analog_pins[] = {A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14};
 size_t number_pins = sizeof(analog_pins)/sizeof(analog_pins[0]);
 
 void setup() {
+  for (int pin = 0; pin < number_pins; pin++) {
+    pinMode(analog_pins[pin], INPUT_PULLUP);
+  }
+
   // initialize serial communications at 57600 bps
   Serial.begin(57600);
 }
 
 void loop() {
-  for(int pin = 0; pin < number_pins; pin++) {
-    // read the analog in value:
-    //sensorValue = analogRead(analog_pins[pin]);
-    //Serial.println(analogRead(analog_pins[pin]));
-    if (analogRead(analog_pins[pin]) > 870) {
+  for (int pin = 0; pin < number_pins; pin++) {
+    if (digitalRead(analog_pins[pin])) {
      Serial.print("1,");
     } else {
       Serial.print("0,");
